@@ -1,0 +1,24 @@
+{% extends 'library/main.html' %}
+
+{% block content %}    
+
+<div>
+    <div class="ns-feed-header margin-top-big">
+        <h2 class="margin-top-small">Here are some groups that might like</h2>
+        <button class="crt-article-btn margin-top-big"><a class="crt-article" href="{% url 'create-group' %}">Create Group</a></button>
+    </div>
+    {% for group in groups %}
+    <div class="community-page margin-top-small">
+        <div class="community-img-div">
+            <img class="community-img-small" src="{{group.imageURL}}">
+        </div>
+        <div class="box-element margin-top-small">
+            <h4><a class="book-title" href="{% url 'group' group.id %}">{{group.name}}</a></h4>
+            <h6>{{group.description}}</h6>
+            <p>Hosted by: {{group.host.name}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

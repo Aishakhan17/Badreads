@@ -1,0 +1,20 @@
+{% extends 'library/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="box-element margin-top-max">
+    <form method="POST" action="" class="signup-form">
+        {% csrf_token %}
+        <h2 class="center-align">Signup for Badreads</h2>
+        {% for field in form %}
+        <div class="form-group">
+            <label class="margin-top-small"><strong>Enter {{field.label}}</strong></label>
+            <br>
+            {{field}}
+        </div>
+        {% endfor %}
+        <button class="btn btn-register margin-top-big">Register</button>
+        <p class="center-align">Already a member? <a href="{% url 'login' %}">Sign in</a></p>
+    </form>
+</div>
+{% endblock %}

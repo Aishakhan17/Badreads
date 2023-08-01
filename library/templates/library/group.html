@@ -1,0 +1,45 @@
+{% extends 'library/main.html' %}
+
+{% block content %}  
+<div class="group-container">  
+    <div class="margin-top-big box-element">
+        <div>
+            <h4 class="margin-top-small">{{group.name}}</h4>
+            <h6>{{group.description}}</h6>
+            <p>Hosted by: {{group.host}}</p>
+        </div>
+        <div class="margin-top-big">
+            <input class="box-element" id="group-message-input" placeholder="write message">
+            <br>
+            <button class="btn del-msg" id="group-message" data-group="{{group.id}}">Post</button>
+        </div>
+        <div>
+            {% if messages %}
+                <h5 class="margin-bottom">Here's what others are talking about</h5>
+                {% for message in messages %}
+                <div class="review-message margin-top-small">
+                    <div class="box-element">
+                        <p><strong>{{message.user.name}}</strong></p>
+                        <p>{{message.body}}</p>
+                        <hr>
+                        <p>{{message.created|timesince}}</p>
+                    </div>
+                    {% if request.user == message.user %}
+                        <button type="submit" class="btn del-msg"><a href="{% url 'delete_message' message.id %}">delete</a></button>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <h5>Start a conversation</h5>
+            {% endif %}
+        </div>
+    </div>
+    <div class="margin-left box-element margin-top-big">
+        <h6>Total Participants: {{participants.count}}</h6>
+        <hr>
+        {% for user in participants %}
+            <p>{{user.name}}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

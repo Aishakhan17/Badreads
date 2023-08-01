@@ -1,0 +1,73 @@
+{% extends 'library/main.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<div class="book-display">
+    <div>
+        <img class="book-img-main product margin-bottom" src="{{book.imageURL}}">
+        <ul class="navbar-nav mr-auto">
+            <li class="box-element product">
+                <a class="dropdown-toggle btn" href="{% url 'trending' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Want to read?
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% for bookshelf in bookshelves %}
+                    <button type="submit" class="dropdown-item update-shelf" data-product="{{book.id}}" data-action="{{bookshelf.name}}">{{bookshelf.name}}</button>
+                    {% endfor %}
+                </div>
+                <button class="dropdown-toggle btn">Shop on Amazon</button>
+            </li>
+        </ul>
+    </div>
+    <div class="box-element box-element-1">
+        <div>
+            <h4><strong>{{book.name}}</strong></h4>
+            <hr>
+            <br>
+            <h6>{{book.avgRating}}</h6>
+            <h6><strong>{{book.author}}</strong></h6>
+            <br>
+            <p>{{book.description}}</p>
+            <div class="genres-tags">
+                <p class="tag-block tag-block1"><strong>Genres</strong></p>
+                {% for genre in book.genres.all %}
+                <p class="tag-block">{{genre}}</p>
+                <br>
+                {% endfor %}
+            </div>
+            <br>
+            <hr>
+            <br>
+            <h6><strong>About the Author</strong></h6>
+            <br>
+            <p>{{book.author.description}}</p>
+            <br>
+        </div>
+        <hr>
+        <div>
+            <input class="box-element" id="review-body" name="review-body" placeholder="Write a review">
+            <br>
+            <button class="review-message btn submitrev-btn" data-book="{{book.id}}">Submit</button>
+        </div>
+        <div>
+            <h6>Here's what other people think</h6>
+            {% for review in reviews %}
+            <div class="review-message">
+                <div class="box-element">
+                    <p><strong>{{review.user.name}}</strong></p>
+                    <p>{{review.body}}</p>
+                    <hr>
+                    <p>{{review.date_posted|timesince}}</p>
+                </div>
+                {% if request.user == review.user %}
+                    <button class="btn submitrev-btn del-rev">delete</button>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}  

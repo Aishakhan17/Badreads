@@ -1,0 +1,87 @@
+{% extends 'library/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="box-element margin-top-big">
+    {% if books or groups or users or newsarticles %}
+    <h4 class="margin-top-small">Here's some content matching your search</h4>
+    <div class="margin-top-small margin-left">
+        <h6><strong>Users</strong></h6>
+        <hr>
+        {% if users %}
+            <div class="search-flex-column">
+                {% for user in users %}
+                <div class="search-flex-row margin-top-small">
+                    <img class="book-img" src="{{user.imageURL}}">
+                    <div>
+                        <p class="margin-left"><a class="book-title" href="{% url 'profile' user.id %}">{{user.name}}</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>There are no users matching your search</p>
+        {% endif %}
+    </div>
+    <div class="margin-top-small margin-left">
+        <h6 class="margin-top-big"><strong>Books</strong></h6>
+        <hr>
+        {% if books %}
+            <div class="search-flex-column">
+                {% for book in books %}
+                <div class="search-flex-row margin-top-small">
+                    <img class="book-img" src="{{book.imageURL}}"> 
+                    <div>
+                        <p class="margin-left"><a class="book-title" href="{% url 'book' book.id %}">{{book.name}}</a></p>
+                        <p class="margin-left">{{book.author}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>There are no books matching your search</p>
+        {% endif %}
+    </div>
+    <div class="margin-top-small margin-left">
+        <h6 class="margin-top-big"><strong>Groups</strong></h6>
+        <hr>
+        {% if groups %}
+            <div class="search-flex-column">
+                {% for group in groups %}
+                <div class="search-flex-row margin-top-small">
+                    <img class="search-img" src="{{group.imageURL}}">
+                    <div>
+                        <p class="margin-left"><a class="book-title" href="{% url 'group' group.id %}">{{group.name}}</a></p>
+                        <p class="margin-left">hosted by: {{group.host.name}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>There are no groups matching your search</p>
+        {% endif %}
+    </div>
+    <div class="margin-top-small margin-left">
+        <h6><strong>Newsarticles</strong></h6>
+        <hr>
+        {% if newsarticles %}
+        <div class="search-flex-column">
+            {% for newsarticle in newsarticles %}
+            <div class="search-flex-row margin-top-small">
+                <img class="search-img" src="{{newsarticle.imageURL}}">
+                <div>
+                    <p class="margin-left"><a class="book-title" href="{% url 'newsarticle' newsarticle.id %}">{{newsarticle.headline}}</a></p>
+                    <p class="margin-left">by: {{newsarticle.author.name}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>There are newsarticles matching your search</p>
+        {% endif %}
+    </div>
+    {% else %}
+        <img class="ErrorGif margin-top-big" src="{% static 'images/404Error.gif' %}">
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'library/main.html' %}
+
+{% block content %}
+
+<div class="trending-container">
+    <div class="box-element margin-top-max">
+        <h2>Filter by genre</h2>
+        <hr>
+        <ul class="trending-sidenav">
+            <li class="margin-top-small"><a class="side-nav-li genre" href="{% url 'trending' %}">All</a></li>
+        {% for genre in genres %}
+            <li class="margin-top-small"><a class="side-nav-li genre" href="{% url 'filter-genre' genre.id %}">{{genre}}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="margin-top-max margin-left box-element">
+        <h2 class="page-heading">Here's some content
+            that other people are enjoying
+        </h2>
+        <hr>
+        {% for book in books %} 
+        <div class="books-grid margin-top-big">
+            <div>
+                <img class="book-img" src="{{book.imageURL}}">
+            </div>
+            <div class="product2">
+                <h6 class="margin-left"><a class="book-title" href="{% url 'book' book.id %}">{{book.name}}</a></h6>
+                <p class="margin-left"><a>{{book.author}}</a></p>
+                <p class="margin-left">{{book.rating}}</p>
+            </div>
+            <div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="product">
+                        <a class="dropdown-toggle thumbnail-btn" href="{% url 'trending' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Want to read?
+                        </a>
+                        <div class="dropdown-menu margin-left" aria-labelledby="navbarDropdown">
+                            {% for bookshelf in bookshelves %}
+                            <button type="submit" class="dropdown-item update-shelf" data-product="{{book.id}}" data-action="{{bookshelf.name}}"" href="{% url 'add_to_shelf' %}">{{bookshelf.name}}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'library/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="createarticle-container margin-top-big">
+    <a class="btn" href="{% url 'community' %}">&#x2190 Go Back</a> 
+    <div>
+        <h4>Create an Article</h4>
+        <form method="POST" action="" enctype="multipart/form-data" onsubmit="return false">
+            {% csrf_token %}
+            <h6 class="createarticle-form-label margin-top-small">Enter a Title</h6>
+            <input id="headline-input" name="headline" class="headline-input box-element margin-top-small input-box">    
+            <h6 class="createarticle-form-label margin-top-small">Enter abstract</h6>
+            <textarea id ="editor" name="running_head" class="abstract-input margin-top-small input-box" style="touch-action: none"></textarea>
+            <h6 class="createarticle-form-label margin-top-small">Enter content</lab>
+            <textarea id ="editor1" name="body" class="body-input margin-top-small input-box" style="touch-action: none"></textarea>
+            <input type="file" name="image" class="margin-top-small" id="ns-image-input" accept="image/png, image/jpeg, image/jpg">
+            <button type="submit" id="create-article" class="review-message btn submitrev-btn margin-top-small">Publish</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

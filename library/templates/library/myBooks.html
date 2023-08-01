@@ -1,0 +1,56 @@
+{% extends 'library/main.html' %}
+
+{% block content %}
+<!-- <div class="col-lg-6">
+    <h2>Books you've read</h2>
+    {% for book in books %}
+    {% if book.read == True %}
+    <img class="book-img" src="{{book.imageURL}}">
+    <div class="box-element">
+        <h6>{{book.name}}</h6>
+        <p>{{book.author}}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div> -->
+<div class="myBooks-display">
+    <div class="side-nav table box-element">
+        <h4>Booshelves</h4>
+        <ul class="side-nav-ul">
+            <li class="margin-top-small"><a class="side-nav-li" href="#">All</a></li>
+            <li class="margin-top-small"><a class="side-nav-li" href="#">Read</a></li>
+            <li class="margin-top-small"><a class="side-nav-li" href="#">Currently Reading</a></li>
+            <li class="margin-top-small"><a class="side-nav-li" href="#">Want to Read</a></li>
+        </ul>
+    </div>
+    <table class="box-element margin-left margin-bottom table table-hover">
+        <thead class="bg-dark">
+            <tr>
+            <th scope="col">Cover</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in userbooks %}
+            <tr>
+            <th scope="row"><img class="table-img" src="{{book.book.imageURL}}" /></th>
+            <td>{{book.book.name}}</td>
+            <td>{{book.book.author}}</td>
+            <td>
+                {% for genre in book.book.genres.all %}
+                    {{genre}} 
+                    <br>    
+                {% endfor %}
+            </td>
+            <td>{{book.book_status}}</td>
+            <td>{{book.date_added}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

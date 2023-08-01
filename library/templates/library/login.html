@@ -1,0 +1,59 @@
+{% extends 'library/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="loginpage-container">
+    {% if page == 'login' %}
+    <div class="login-tab">
+        <br>
+        <h4>Discover More Trash Content</h4>
+        <br>
+        <h4>Login</h4>
+        <div class="form-container">
+            <form class="form"  action="" method="POST">
+                {% csrf_token %}
+                <label for="email" class="form-field-label">Email</label>
+                <input type="email" name="email" id="email" placeholder="janedoe@email.com" class="form-field">
+                <br>
+                <label for="password" class="form-field-label">Password</label>
+                <input type="password" id="password" name="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-field">
+                <button class="btn">Login</button>
+            </form>
+            <br>
+            <p>Not a member? <a class="book-title" href="{% url 'register' %}">Signup</a></p>
+        </div>
+    </div>
+    {% endif %}
+    <div class="banner">
+        <img class="banner-icon" src="{% static 'images/trashRacoon.jpg' %}" />
+    </div>
+    <div class="feed-header-msgs margin-top-small">
+        <span>
+        <div class="header-msg1">
+            <h3>Deciding on your 
+                next mindless read?</h3>
+            <p>You're in the right place: A bibliophile's worst nightmare. 
+                <br>
+                Tell us what you're looking for!</p>
+        </div>
+        </span>
+        <span>
+        <div class="header-msg2">
+            <h3>See what your friends 
+                are reading</h3>
+            <p>Chances are they're also hooked onto some trash literature. 
+                <br>
+                But, hey, we're not judging!</p>
+        </div>
+        </span>
+    </div>
+    <div class="carousel">
+        <h3> See what's trending</h3>
+        <div class="carousel-row">
+            {% for book in carouselBooks %}
+                <img class="carousel-img" src="{{book.imageURL}}" >
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

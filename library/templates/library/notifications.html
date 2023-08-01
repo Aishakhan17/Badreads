@@ -1,0 +1,29 @@
+{% extends 'library/main.html' %}
+
+{% block content %}
+<div class="margin-top-max box-element">
+    <h4>Friend Requests</h4>
+    {% if friend_requests %}
+    {% for friend_request in friend_requests %}
+    <div class="fr-container">
+        <p>{{friend_request.from_user.name}} sent you a friend request</p>
+        <ul class="navbar-nav mr-auto">
+            <li class="product">
+                <a class="dropdown-toggle btn" href="{% url 'trending' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Accept
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <button type="submit" class="dropdown-item friendRequestBtn" data-request="{{friend_request.id}}" data-action="Accept">Accept</button>
+                    <button type="submit" class="dropdown-item friendRequestBtn" data-request="{{friend_request.id}}" data-action="Reject">Reject</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div>
+        <p>You have no new friend requests</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

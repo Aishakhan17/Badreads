@@ -1,0 +1,17 @@
+{% extends 'library/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="article-container box-element margin-top-max">
+    <div>
+        <h1 class="article-headline margin-top-small center-align">{{newsarticle.headline|safe}}</h1>
+        <img class="newsarticle-img-main" src="{{newsarticle.imageURL}}">
+    </div>
+    <div class="margin-top-big">
+        <hr>
+        <div class="margin-top-big margin-bottom center-align"><i>{{newsarticle.running_head|safe}}</i></div>
+        <hr>
+        <div class="margin-top-big margin-bottom">{{newsarticle.body|safe}}</div>
+    </div>
+</div>
+{% endblock %}

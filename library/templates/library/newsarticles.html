@@ -1,0 +1,22 @@
+{% extends 'library/main.html' %}
+
+{% block content %}
+<div class="ns-feed-container">
+    <div class="ns-feed-header margin-top-big">
+        <h2 class="margin-top-small">A sneak peek into the latest articles</h2>
+        <button class="crt-article-btn crt-article-btn2 margin-top-big"><a class="crt-article" href="{% url 'news-article-form' %}">Create Article</a></button>
+    </div>
+    {% for newsarticle in newsarticles %}
+    <div class="box-element2 margin-top-small newsarticle-thumbnail-div">
+        <div class="">
+            <img class="newsarticle-thumbnail" src="{{newsarticle.imageURL}}">
+        </div>
+        <div class="margin-top-small margin-left">
+            <h6 class="center-align"><strong><a class="book-title" href="{% url 'newsarticle' newsarticle.id %}">{{newsarticle.headline|safe}}</a></strong></h6>
+            <p class="center-align">by {{newsarticle.author.name|safe}}</p>
+            <p>{{newsarticle.excerpt|safe}}....</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

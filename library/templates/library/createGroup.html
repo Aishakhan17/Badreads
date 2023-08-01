@@ -1,0 +1,20 @@
+{% extends 'library/main.html' %}
+{% load static %}
+{% block content %}   
+<div class="box-element margin-top-max">
+    <div>
+    <a class="btn" href="{% url 'community' %}">&#x2190 Go Back</a>
+    <h2 class="margin-top-small">Enter the following details</h2>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <label class="margin-top-small">Enter {{field.name}}</label>
+            <br>
+            {{field}}
+        {% endfor %}
+        <!-- <input type="file" class="margin-top-small image-input"> -->
+        <button class="btn submitrev-btn del-rev margin-top-big">Create Group</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

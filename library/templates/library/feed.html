@@ -1,0 +1,60 @@
+{% extends 'library/main.html' %}
+
+{% block content %}
+
+<div class="feed-container">
+    <div class="feed-section feed-section1">
+        {% for book in userbooks %}
+            {% if book.book_status == "Currently Reading" %}
+            <h6>Currently Reading</h6>
+            <hr>
+            <div class="currently-reading-block">
+                <div>
+                    <img class="feed-img-small" src="{{book.book.imageURL}}">
+                </div>    
+                <div class="currently-reading-block1">
+                    <p class="margin-top-small"><strong>{{book.book.name}}</strong></p>
+                    <p class="margin-top-negative">by <strong>{{book.book.author}}</strong></p>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="feed-section feed-section2">
+        <h6>Recent Activity</h6>
+        <hr>
+        <div class="box-element margin-top-small">
+            {% if friends %}
+            <h6>Here's what your friends are reading</h6>
+            {% for friend in friends %}
+                {% for book in f_userbooks %}
+                    {% if book.user == friend %}
+                    <div class="search-flex-row margin-top-small">
+                        <img class="book-img" src="{{book.book.imageURL}}">
+                        <div class="search-flex-column margin-left">
+                            <p>{{friend.name}} added <strong>{{book.book.name}}</strong> to their books</p>
+                            <p>Bookshelf: {{book.book_status}}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="feed-section feed-section3">
+        <h6>News and Interviews</h6>
+        <hr>
+        <div>
+            {% for newsarticle in newsarticles %}
+            <div class="box-element margin-top-small">
+                <h6><strong><a class="book-title" href="{% url 'newsarticle' newsarticle.id %}">{{newsarticle.headline}}</a></strong></h6>
+                <p>by {{newsarticle.author.name|safe}}</p>
+                <p>{{newsarticle.blurb|safe}}....</p>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+    </div>
+</div>
+{% endblock %}
